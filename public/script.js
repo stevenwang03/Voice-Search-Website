@@ -18,6 +18,14 @@ recognition.lang = 'en-US';
 recognition.interimResults = true;
 //recognition.start();
 
+function onStart(e) {
+  recognition.start();
+}
+
+function onStop(e) {
+  recognition.stop();
+}
+
 
 // define variables that reference elements on our page
 const dreamsList = document.getElementById("dreams");
