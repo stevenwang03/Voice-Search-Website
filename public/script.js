@@ -14,7 +14,7 @@ recognition.onresult = function(event) {
   appendNewDream(text);
 }
 
-recognition.lang = 'en-US';
+recognition.lang =  'en-US';
 recognition.interimResults = true;
 //recognition.start();
 
