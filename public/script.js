@@ -18,11 +18,11 @@ recognition.lang = 'en-US';
 recognition.interimResults = true;
 //recognition.start();
 
-function onStart(e) {
+function onStart() {
   recognition.start();
 }
 
-function onStop(e) {
+function onStop() {
   recognition.stop();
 }
 
