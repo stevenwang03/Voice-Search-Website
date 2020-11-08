@@ -16,7 +16,7 @@ recognition.onresult = function(event) {
 
 recognition.lang = 'en-US';
 recognition.interimResults = true;
-recognition.start();
+//recognition.start();
 
 
 // define variables that reference elements on our page
