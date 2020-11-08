@@ -3,6 +3,22 @@
 
 console.log("hello world :o");
 
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+
+var recognition = new SpeechRecognition();
+
+recognition.onresult = function(event) {
+  var text = event.results[0][0].transcript;
+  console.log('Confidence: ' + event.results[0][0].confidence);
+  console.log(text);
+  appendNewDream(text);
+}
+
+recognition.lang = 'en-US';
+recognition.interimResults = true;
+recognition.start();
+
+
 // define variables that reference elements on our page
 const dreamsList = document.getElementById("dreams");
 const dreamsForm = document.querySelector("form");
