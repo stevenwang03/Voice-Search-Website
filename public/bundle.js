@@ -32,6 +32,9 @@ function onStop() {
 const startButton = document.getElementById("START");
 startButton.addEventListener("click", event=> onStart());
 
+const stopButton = document.getElementById("STOP");
+stopButton.addEventListener("click", event=> onStop());
+
 function getKeyWords(sentence) {
   var extraction_result = keyword_extractor.extract(sentence,{
                                                                   language:"english",
