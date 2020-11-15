@@ -10,7 +10,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "keyword-extractor": "^0.0.19"
   },
   "engines": {
     "node": "12.x"

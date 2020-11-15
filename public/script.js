@@ -2,6 +2,7 @@
 // run by the browser each time the page is loaded
 
 console.log("hello world :o");
+var keyword_extractor = require("keyword-extractor");
 
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 
@@ -26,6 +27,17 @@ function onStop() {
   recognition.stop();
 }
 
+function getKeyWords(sentence) {
+  var extraction_result = keyword_extractor.extract(sentence,{
+                                                                  language:"english",
+                                                                  remove_digits: true,
+                                                                  return_changed_case:true,
+                                                                  remove_duplicates: false
+
+                                                               });
+  return extraction_result;
+  
+}
 
 // define variables that reference elements on our page
 const dreamsList = document.getElementById("dreams");
