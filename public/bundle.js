@@ -29,6 +29,9 @@ function onStop() {
   recognition.stop();
 }
 
+const startButton = document.getElementById("START");
+startButton.addEventListener("click", event=> onStart());
+
 function getKeyWords(sentence) {
   var extraction_result = keyword_extractor.extract(sentence,{
                                                                   language:"english",
