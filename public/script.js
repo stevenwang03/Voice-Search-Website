@@ -2,7 +2,7 @@
 // run by the browser each time the page is loaded
 
 console.log("hello world :o");
-var keyword_extractor = require("keyword-extractor");
+//var keyword_extractor = require("keyword-extractor");
 
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 
