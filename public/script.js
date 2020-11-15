@@ -2,7 +2,7 @@
 // run by the browser each time the page is loaded
 
 console.log("hello world :o");
-//var keyword_extractor = require("keyword-extractor");
+var keyword_extractor = require("keyword-extractor");
 
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 
@@ -12,7 +12,8 @@ recognition.onresult = function(event) {
   var text = event.results[0][0].transcript;
   console.log('Confidence: ' + event.results[0][0].confidence);
   console.log(text);
-  appendNewDream(text);
+  var keywords = getKeyWords(text)
+  appendNewDream(keywords);
 }
 
 recognition.lang =  'en-US'; // zh for chinese
