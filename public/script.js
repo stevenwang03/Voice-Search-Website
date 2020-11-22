@@ -14,6 +14,7 @@ recognition.onresult = function(event) {
   var text = event.results[0][0].transcript;
   console.log('Confidence: ' + event.results[0][0].confidence);
   console.log(text);
+  display(text)
   var keywords = getKeyWords(text)
   
   keywords.forEach(s=> {
@@ -28,7 +29,7 @@ recognition.onresult = function(event) {
 
 
 recognition.lang =  'en-US'; // zh for chinese
-recognition.interimResults = true;
+recognition.interimResults = false;
 //recognition.start();
 
 function onStart() {
@@ -44,6 +45,13 @@ startButton.addEventListener("click", event=> onStart());
 
 const stopButton = document.getElementById("STOP");
 stopButton.addEventListener("click", event=> onStop());
+
+const displayArea = document.getElementById("DISPLAY")
+
+function display(sentence)
+{
+  displayArea.innerHTML = sentence
+}
 
 function getKeyWords(sentence) {
   var extraction_result = keyword_extractor.extract(sentence,{
@@ -67,6 +75,8 @@ function appendNewDream(dream) {
   newListItem.innerText = dream;
   dreamsList.appendChild(newListItem);
 }
+
+display("Great")
 
 // fetch the initial list of dreams
 fetch("/dreams")
