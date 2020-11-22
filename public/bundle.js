@@ -5,6 +5,8 @@
 console.log("hello world :o");
 var keyword_extractor = require("keyword-extractor");
 
+var wordsSeen = new Set()
+
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 
 var recognition = new SpeechRecognition();
@@ -15,10 +17,15 @@ recognition.onresult = function(event) {
   console.log(text);
   var keywords = getKeyWords(text)
   
-  keywords.forEach(s=>
-     appendNewDream(s)
+  keywords.forEach(s=> {
+     if(!wordsSeen.has(s)) {                 
+       appendNewDream(s);
+       wordsSeen.add(s);
+    }
+  }
   )
 }
+
 
 recognition.lang =  'en-US'; // zh for chinese
 recognition.interimResults = true;
