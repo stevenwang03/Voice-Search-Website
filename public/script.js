@@ -17,6 +17,7 @@ recognition.onresult = function(event) {
   var keywords = getKeyWords(text)
   
   keywords.forEach(s=> {
+     console.log(s)
      if(!wordsSeen.has(s)) {                 
        appendNewDream(s);
        wordsSeen.add(s);
@@ -49,7 +50,7 @@ function getKeyWords(sentence) {
                                                                   language:"english",
                                                                   remove_digits: true,
                                                                   return_changed_case:true,
-                                                                  remove_duplicates: false
+                                                                  remove_duplicates: true
 
                                                                });
   return extraction_result;
