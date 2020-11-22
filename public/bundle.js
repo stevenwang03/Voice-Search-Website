@@ -14,7 +14,10 @@ recognition.onresult = function(event) {
   console.log('Confidence: ' + event.results[0][0].confidence);
   console.log(text);
   var keywords = getKeyWords(text)
-  appendNewDream(keywords);
+  
+  keywords.forEach(s=>
+     appendNewDream(s)
+  )
 }
 
 recognition.lang =  'en-US'; // zh for chinese
