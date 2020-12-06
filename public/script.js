@@ -68,6 +68,7 @@ function getKeyWords(sentence) {
 // define variables that reference elements on our page
 const dreamsList = document.getElementById("dreams");
 const dreamsForm = document.querySelector("form");
+const picture = document.getElementById("PICTURE");
 
 // a helper function that creates a list item for a given dream
 function appendNewDream(dream) {
@@ -77,18 +78,17 @@ function appendNewDream(dream) {
 }
 
 function showPicture(url) {
-  //var img = document.createElement("img");
-  //img.src = url;
-  var src = document.getElementById("PICTURE");
-  //src.appendChild(img);
-  //src.innerHTML = '<img src="' + url + '"/>';
-  src.innerHTML = 'Ok'
+  var img = document.createElement("img");
+  img.src = url;
+  img.width = 200;
+  picture.appendChild(img);
 }
 
-display("Great")
+display("Great");
+
 showPicture(
   "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
-)
+);
 
 // fetch the initial list of dreams
 fetch("/dreams")
