@@ -76,7 +76,19 @@ function appendNewDream(dream) {
   dreamsList.appendChild(newListItem);
 }
 
+function showPicture(url) {
+  //var img = document.createElement("img");
+  //img.src = url;
+  var src = document.getElementById("PICTURE");
+  //src.appendChild(img);
+  //src.innerHTML = '<img src="' + url + '"/>';
+  src.innerHTML = 'Ok'
+}
+
 display("Great")
+showPicture(
+  "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
+)
 
 // fetch the initial list of dreams
 fetch("/dreams")
