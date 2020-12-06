@@ -3,6 +3,8 @@
 
 var jq = require("jquery")
 
+var imageSearch = require("./image-search")
+
 var keyword_extractor = require("keyword-extractor");
 
 var wordsSeen = new Set()
@@ -21,7 +23,7 @@ recognition.onresult = function(event) {
   keywords.forEach(s=> {
      console.log(s)
      if(!wordsSeen.has(s)) {     
-       searchImage(s);
+       imageSearch.searchImage(jq, picture, s); // search for image
        appendNewDream(s);
        wordsSeen.add(s);
     }
@@ -35,7 +37,8 @@ recognition.interimResults = false;
 //recognition.start();
 
 function onStart() {
-  clearPictures(); 
+  //clearPictures(); 
+  imageSearch.clearPictures(picture);
   recognition.start();
 }
 
@@ -85,10 +88,7 @@ function clearPictures() {
 }
 
 function showPicture(url) {
-  var img = document.createElement("img");
-  img.src = url;
-  img.width = 200;
-  picture.appendChild(img);
+  imageSearch.showPicture(picture, url);
 }
 
 function searchImage(keywords) {
