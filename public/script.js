@@ -1,17 +1,10 @@
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded
 
+var jq = require("jquery")
+
 console.log("hello world :o");
 var keyword_extractor = require("keyword-extractor");
-
-const SerpApi = require('google-search-results-nodejs')
-const search = new SerpApi.GoogleSearch("Your Private Key")
-search.json({
- q: "Coffee", 
- location: "Austin, TX"
-}, (result) => {
-  console.log(result)
-})
 
 var wordsSeen = new Set()
 
@@ -95,17 +88,18 @@ function showPicture(url) {
 }
 
 function searchImage(keywords) {
-  var myKey = "19419380-dc910ee0a7f8e64c10650f9f1"
+  var myKey = "19419380-dc910ee0a7f8e64c10650f9f1";
   var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
-  $.getJSON(URL, function(data){
+  jq.getJSON(URL, function(data){
     if (parseInt(data.totalHits) > 0)
-        $.each(data.hits, function(i, hit){ console.log(hit.pageURL);
-                                            showPicture(hit.)
+        jq.each(data.hits, function(i, hit){ console.log(hit.pageURL);
+                                            showPicture(hit.previewURL);
                                           });
     else
         console.log('No hits');
     });
 }
+
 
 display("Great");
 

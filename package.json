@@ -14,8 +14,7 @@
     "keyword-extractor": "^0.0.19",
     "watchify": "^3.11.1",
     "browserify": "^17.0.0",
-    "google-search": "^0.0.5",
-    "google-search-results-nodejs": "^2.0.1"
+    "jquery": "^3.5.1"
   },
   "engines": {
     "node": "12.x"
