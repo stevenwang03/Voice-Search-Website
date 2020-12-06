@@ -28,7 +28,8 @@ recognition.onresult = function(event) {
   
   keywords.forEach(s=> {
      console.log(s)
-     if(!wordsSeen.has(s)) {                 
+     if(!wordsSeen.has(s)) {     
+       searchImage(s);
        appendNewDream(s);
        wordsSeen.add(s);
     }
@@ -91,6 +92,19 @@ function showPicture(url) {
   img.src = url;
   img.width = 200;
   picture.appendChild(img);
+}
+
+function searchImage(keywords) {
+  var myKey = "19419380-dc910ee0a7f8e64c10650f9f1"
+  var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
+  $.getJSON(URL, function(data){
+    if (parseInt(data.totalHits) > 0)
+        $.each(data.hits, function(i, hit){ console.log(hit.pageURL);
+                                            showPicture(hit.)
+                                          });
+    else
+        console.log('No hits');
+    });
 }
 
 display("Great");
