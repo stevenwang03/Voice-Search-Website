@@ -3,8 +3,8 @@
 // run by the browser each time the page is loaded
 
 console.log("hello world :o");
-
 var keyword_extractor = require("keyword-extractor");
+
 const SerpApi = require('google-search-results-nodejs')
 const search = new SerpApi.GoogleSearch("Your Private Key")
 search.json({
