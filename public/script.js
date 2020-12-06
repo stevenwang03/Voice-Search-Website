@@ -4,6 +4,15 @@
 console.log("hello world :o");
 var keyword_extractor = require("keyword-extractor");
 
+const SerpApi = require('google-search-results-nodejs')
+const search = new SerpApi.GoogleSearch("Your Private Key")
+search.json({
+ q: "Coffee", 
+ location: "Austin, TX"
+}, (result) => {
+  console.log(result)
+})
+
 var wordsSeen = new Set()
 
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
