@@ -4,7 +4,6 @@
 
 var jq = require("jquery")
 
-console.log("hello world :o");
 var keyword_extractor = require("keyword-extractor");
 
 var wordsSeen = new Set()
@@ -37,6 +36,7 @@ recognition.interimResults = false;
 //recognition.start();
 
 function onStart() {
+  clearPictures(); 
   recognition.start();
 }
 
@@ -79,6 +79,10 @@ function appendNewDream(dream) {
   const newListItem = document.createElement("li");
   newListItem.innerText = dream;
   dreamsList.appendChild(newListItem);
+}
+
+function clearPictures() {
+  picture.innerHTML = '';
 }
 
 function showPicture(url) {
