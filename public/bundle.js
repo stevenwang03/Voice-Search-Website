@@ -1,10 +1,12 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+var jq = require("jquery")
+
 module.exports = {
   showPicture: showPicture,
   clearPictures: function(container) {
     container.innerHTML = '';
   },
-  searchImage:function(jq, container, keywords) {
+  searchImage:function(container, keywords) {
     var myKey = "19419380-dc910ee0a7f8e64c10650f9f1";
     var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
     jq.getJSON(URL, function(data){
@@ -24,11 +26,9 @@ function showPicture(container, url) {
   img.width = 200;
   container.appendChild(img);
 }
-},{}],2:[function(require,module,exports){
+},{"jquery":3}],2:[function(require,module,exports){
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded
-
-var jq = require("jquery")
 
 var imageSearch = require("./image-search")
 
@@ -50,7 +50,7 @@ recognition.onresult = function(event) {
   keywords.forEach(s=> {
      console.log(s)
      if(!wordsSeen.has(s)) {     
-       imageSearch.searchImage(jq, picture, s); // search for image
+       imageSearch.searchImage(picture, s); // search for image
        appendNewDream(s);
        wordsSeen.add(s);
     }
@@ -110,31 +110,8 @@ function appendNewDream(dream) {
   dreamsList.appendChild(newListItem);
 }
 
-function clearPictures() {
-  picture.innerHTML = '';
-}
-
-function showPicture(url) {
-  imageSearch.showPicture(picture, url);
-}
-
-function searchImage(keywords) {
-  var myKey = "19419380-dc910ee0a7f8e64c10650f9f1";
-  var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
-  jq.getJSON(URL, function(data){
-    if (parseInt(data.totalHits) > 0)
-        jq.each(data.hits, function(i, hit){ console.log(hit.pageURL);
-                                            showPicture(hit.previewURL);
-                                          });
-    else
-        console.log('No hits');
-    });
-}
-
-
-display("Great");
-
-showPicture(
+display("Please speak to trigger search"); 
+imageSearch.showPicture(picture,
   "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
 );
 
@@ -164,7 +141,7 @@ fetch("/dreams")
     });
   });
 
-},{"./image-search":1,"jquery":3,"keyword-extractor":4}],3:[function(require,module,exports){
+},{"./image-search":1,"keyword-extractor":4}],3:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/

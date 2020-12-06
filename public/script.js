@@ -1,8 +1,6 @@
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded
 
-var jq = require("jquery")
-
 var imageSearch = require("./image-search")
 
 var keyword_extractor = require("keyword-extractor");
@@ -23,7 +21,7 @@ recognition.onresult = function(event) {
   keywords.forEach(s=> {
      console.log(s)
      if(!wordsSeen.has(s)) {     
-       imageSearch.searchImage(jq, picture, s); // search for image
+       imageSearch.searchImage(picture, s); // search for image
        appendNewDream(s);
        wordsSeen.add(s);
     }
@@ -83,31 +81,8 @@ function appendNewDream(dream) {
   dreamsList.appendChild(newListItem);
 }
 
-function clearPictures() {
-  picture.innerHTML = '';
-}
-
-function showPicture(url) {
-  imageSearch.showPicture(picture, url);
-}
-
-function searchImage(keywords) {
-  var myKey = "19419380-dc910ee0a7f8e64c10650f9f1";
-  var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
-  jq.getJSON(URL, function(data){
-    if (parseInt(data.totalHits) > 0)
-        jq.each(data.hits, function(i, hit){ console.log(hit.pageURL);
-                                            showPicture(hit.previewURL);
-                                          });
-    else
-        console.log('No hits');
-    });
-}
-
-
-display("Great");
-
-showPicture(
+display("Please speak to trigger search"); 
+imageSearch.showPicture(picture,
   "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
 );
 

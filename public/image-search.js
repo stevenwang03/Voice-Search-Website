@@ -1,9 +1,11 @@
+var jq = require("jquery")
+
 module.exports = {
   showPicture: showPicture,
   clearPictures: function(container) {
     container.innerHTML = '';
   },
-  searchImage:function(jq, container, keywords) {
+  searchImage:function(container, keywords) {
     var myKey = "19419380-dc910ee0a7f8e64c10650f9f1";
     var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
     jq.getJSON(URL, function(data){
