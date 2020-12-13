@@ -21,7 +21,7 @@ recognition.onresult = function(event) {
   keywords.forEach(s=> {
      console.log(s)
      if(!wordsSeen.has(s)) {     
-       imageSearch.searchImage(picture, s); // search for image
+       imageSearch.searchImage(pictureArea, s); // search for image
        appendNewDream(s);
        wordsSeen.add(s);
     }
@@ -36,7 +36,7 @@ recognition.interimResults = false;
 
 function onStart() {
   //clearPictures(); 
-  imageSearch.clearPictures(picture);
+  imageSearch.clearPictures(pictureArea);
   recognition.start();
 }
 
@@ -44,19 +44,10 @@ function onStop() {
   recognition.stop();
 }
 
-const startButton = document.getElementById("START");
-startButton.addEventListener("click", event=> onStart());
-
-const stopButton = document.getElementById("STOP");
-stopButton.addEventListener("click", event=> onStop());
-
-const displayArea = document.getElementById("DISPLAY")
-
 function display(sentence)
 {
   displayArea.innerHTML = sentence
 }
-
 function getKeyWords(sentence) {
   var extraction_result = keyword_extractor.extract(sentence,{
                                                                   language:"english",
@@ -69,10 +60,18 @@ function getKeyWords(sentence) {
   
 }
 
+const startButton = document.getElementById("START");
+startButton.addEventListener("click", event=> onStart());
+
+const stopButton = document.getElementById("STOP");
+stopButton.addEventListener("click", event=> onStop());
+
 // define variables that reference elements on our page
 const dreamsList = document.getElementById("dreams");
 const dreamsForm = document.querySelector("form");
-const picture = document.getElementById("PICTURE");
+
+const displayArea = document.getElementById("DISPLAY")
+const pictureArea = document.getElementById("PICTURE");
 
 // a helper function that creates a list item for a given dream
 function appendNewDream(dream) {
@@ -82,7 +81,7 @@ function appendNewDream(dream) {
 }
 
 display("Please speak to trigger search"); 
-imageSearch.showPicture(picture,
+imageSearch.showPicture(pictureArea,
   "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
 );
 
