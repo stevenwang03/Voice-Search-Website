@@ -21,7 +21,7 @@ recognition.onresult = function(event) {
   keywords.forEach(s=> {
      console.log(s)
      if(!wordsSeen.has(s)) {     
-       imageSearch.searchImage(pictureArea, s); // search for image
+       //imageSearch.searchImage(pictureArea, s); // search for image
        appendNewDream(s);
        wordsSeen.add(s);
     }
@@ -78,6 +78,8 @@ function appendNewDream(dream) {
   const newListItem = document.createElement("li");
   newListItem.innerText = dream;
   dreamsList.appendChild(newListItem);
+  imageSearch.clearPictures(pictureArea);
+  imageSearch.searchImage(pictureArea, dream); // search for image
 }
 
 display("Please speak to trigger search"); 
@@ -93,7 +95,7 @@ fetch("/dreams")
     dreamsList.firstElementChild.remove();
   
     // iterate through every dream and add it to our page
-    dreams.forEach(appendNewDream);
+    //dreams.forEach(appendNewDream);
   
     // listen for the form to be submitted and add a new dream when it is
     dreamsForm.addEventListener("submit", event => {
