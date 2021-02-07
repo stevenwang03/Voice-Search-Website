@@ -109,7 +109,10 @@
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
           
-            if(prediction[i].className == "Raise hand" && prediction[i].probability > 0.95) {
+            if(prediction[i].className == "Raise hand" && prediction[i].probability > 0.85) {
+              window.scrollBy(0, -4);
+            }
+            if(prediction[i].className == "Hand down" && prediction[i].probability > 0.85) {
               window.scrollBy(0, 4);
             }
         }
