@@ -22,21 +22,28 @@
       <h1>Voice Search</h1>
     </header>
     
-    <div>Teachable Machine Image Model</div>
-    <button type="button" onclick="init()">Start</button>
-    <div id="webcam-container"></div>
-    <div id="label-container"></div>
-
+    <table style="width:100%">
+      <tr>
+        <td>
+          <div>Teachable Machine Image Model</div>
+          <button type="button" onclick="init()">Start</button>
+          <div id="webcam-container"></div>
+          <div id="label-container"></div>
+        </td>
+        <td>
+          <p>Press start to start speech recognition</p>
+          <button id="START">Start</button>
+          <button id="STOP">Stop</button>        
+            <div id="DISPLAY">
+              Text output here
+          </div>
+        </td>
+      </tr>
+    </table>
+    
     <main>
       <h2>Oh hi,</h2>
 
-      <p>Press start to start speech recognition</p>
-      <button id="START">Start</button>
-      <button id="STOP">Stop</button>
-      <p>        
-        <div id="DISPLAY">
-          Text output here
-      </div>
       <p>
       <div id="PICTURE">        
       </div>
