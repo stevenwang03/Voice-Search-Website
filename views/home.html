@@ -107,9 +107,6 @@
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
-          if(prediction[i].className == "Raise hand" && prediction[i].probability > 0.95) {
-            window.scrollBy(0,2); // scroll up one pixel
-          }
         }
     }
 </script>
