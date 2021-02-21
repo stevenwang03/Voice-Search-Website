@@ -75,7 +75,6 @@
     const URL = "https://teachablemachine.withgoogle.com/models/3dYD-gu38/";
 
     let model, webcam, labelContainer, maxPredictions;
-    let predictWindow = []
 
     // Load the image model and setup the webcam
     async function init() {
@@ -116,24 +115,40 @@
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
-        const prediction = await model.predict(webcam.canvas);
+        const currentPrediction = await model.predict(webcam.canvas);
         
-        predictWindow.push(prediction)
-       
-        for(let )
-        
-        for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
-          
-            if(prediction[i].className == "Raise hand" && prediction[i].probability > 0.85) {
-              window.scrollBy(0, -4);
-            }
-            if(prediction[i].className == "Hand down" && prediction[i].probability > 0.85) {
-              window.scrollBy(0, 4);
-            }
+        predictWindow.push(currentPrediction);
+        if(predictWindow.lenth > 10) {
+          predictWindow.shift();
         }
+                 
+        let upCount = 0;
+        let downCount = 0;
+        for(let w=0; w < predictWindow.length; w++) {
+          let prediction = predictWindow[w];
+          
+          for (let i = 0; i < maxPredictions; i++) {
+              const classPrediction =
+                  prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+              labelContainer.childNodes[i].innerHTML = classPrediction;
+
+              if(prediction[i].className == "Raise hand" && prediction[i].probability > 0.85) {
+                //window.scrollBy(0, -4);
+                upCount = upCount + 1;
+              }
+              if(prediction[i].className == "Hand down" && prediction[i].probability > 0.85) {
+                //window.scrollBy(0, 4);
+                downCount = downCount + 1;
+              }
+          }
+        }
+      
+        if(upCount > downCount + 2) {
+          window.scrollBy(0, -4);
+        }
+        if(downCount > upCount + 2) {
+          window.scrollBy(0, 4);
+        }      
     }
 </script>
 
