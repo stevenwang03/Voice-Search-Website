@@ -118,8 +118,8 @@
         const currentPrediction = await model.predict(webcam.canvas);
         
         predictWindow.push(currentPrediction);
-        if(predictWindow.lenth > 10) {
-          predictWindow.shift();
+        if(predictWindow.length > 25) {
+          predictWindow.splice(0,1);
         }
                  
         let upCount = 0;
