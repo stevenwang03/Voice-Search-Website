@@ -75,6 +75,7 @@
     const URL = "https://teachablemachine.withgoogle.com/models/3dYD-gu38/";
 
     let model, webcam, labelContainer, maxPredictions;
+    let predictWindow = []
 
     // Load the image model and setup the webcam
     async function init() {
@@ -109,10 +110,18 @@
         window.requestAnimationFrame(loop);
     }
 
+
+    let predictWindow = []
+ 
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
+        
+        predictWindow.push(prediction)
+       
+        for(let )
+        
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
