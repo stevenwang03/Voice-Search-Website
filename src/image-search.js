@@ -13,12 +13,13 @@ function searchImages(container, keywords) {
     var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
     jq.getJSON(URL, function(data){
       if (parseInt(data.totalHits) > 0)
-          jq.each(data.hits, function(i, hit){ console.log(hit.pageURL);
-                                               showPicture(container, hit.previewURL);
-                                            });
+          jq.each(data.hits, function(i, hit) {
+            console.log(hit.pageURL);
+            showPicture(container, hit.previewURL);                                   
+          });
       else
           console.log('No hits');
-      });
+    });
 }
 
 function showPicture(container, url) {
