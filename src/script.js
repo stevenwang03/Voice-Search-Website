@@ -1,7 +1,7 @@
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded  
 
-var imageSearch = require("./image-search")
+var myLib = require("./image-search")
 
 var keyword_extractor = require("keyword-extractor");
 
@@ -33,6 +33,8 @@ recognition.onresult = function(event) {
 recognition.lang =  'en-US'; // zh for chinese
 recognition.interimResults = false;
 //recognition.start();
+
+var imageSearcher = new myLib.ImageSearcher(pictureArea);
 
 function onStart() {
   //clearPictures(); 

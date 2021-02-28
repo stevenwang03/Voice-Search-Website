@@ -2,11 +2,7 @@
 var jq = require("jquery")
 
 module.exports = {
-  showPicture: showPicture,
-  clearPictures: function(container) {
-    container.innerHTML = '';
-  },
-  searchImage: searchImages
+  ImageSearcher: MyImageSearcher
 };
 
 function searchImages(container, keywords) {
@@ -30,7 +26,7 @@ function showPicture(container, url) {
   container.appendChild(img);
 }
 
-class ImageSearcher {
+class MyImageSearcher {
   constructor(container) {
     this.container = container;
   }
@@ -38,12 +34,20 @@ class ImageSearcher {
   display(url) {
     showPicture(this.container, url)
   }
+  
+  clearPictures() {
+    this.container.innerHTML = '';   
+  }
+  
+  searchImages(keywords) {
+    searchImages(this.container, keywords);
+  }  
 }
 },{"jquery":3}],2:[function(require,module,exports){
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded  
 
-var imageSearch = require("./image-search")
+var myLib = require("./image-search")
 
 var keyword_extractor = require("keyword-extractor");
 
@@ -75,6 +79,8 @@ recognition.onresult = function(event) {
 recognition.lang =  'en-US'; // zh for chinese
 recognition.interimResults = false;
 //recognition.start();
+
+var imageSearcher = new myLib.ImageSearcher(pictureArea);
 
 function onStart() {
   //clearPictures(); 
