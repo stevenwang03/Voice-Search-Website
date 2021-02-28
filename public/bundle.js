@@ -20,12 +20,13 @@ class MyImageSearcher {
   
   searchImages(keywords) {
     var myKey = this.apiKey;
+    var self = this;
     var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
     jq.getJSON(URL, function(data){
       if (parseInt(data.totalHits) > 0)
           jq.each(data.hits, function(i, hit) {
             console.log(hit.pageURL);
-            this.display(hit.previewURL);                                   
+            self.display(hit.previewURL);                                   
           });
       else
           console.log('No hits');
@@ -60,7 +61,6 @@ recognition.onresult = function(event) {
   keywords.forEach(s=> {
      console.log(s)
      if(!wordsSeen.has(s)) {     
-       //imageSearch.searchImage(pictureArea, s); // search for image
        appendNewDream(s);
        wordsSeen.add(s);
     }
@@ -72,8 +72,10 @@ recognition.onresult = function(event) {
 recognition.lang =  'en-US'; // zh for chinese
 recognition.interimResults = false;
 //recognition.start();
+const displayArea = document.getElementById("DISPLAY")
 
-var imageSearcher = new myLib.PixaBayImageSearcher("19419380-dc910ee0a7f8e64c10650f9f1", pictureArea);
+var imageSearcher = new myLib.PixaBayImageSearcher("19419380-dc910ee0a7f8e64c10650f9f1", 
+                                                   document.getElementById("PICTURE"));
 
 function onStart() {
   //clearPictures(); 
@@ -111,8 +113,7 @@ stopButton.addEventListener("click", event=> onStop());
 const dreamsList = document.getElementById("dreams");
 const dreamsForm = document.querySelector("form");
 
-const displayArea = document.getElementById("DISPLAY")
-const pictureArea = document.getElementById("PICTURE");
+
 
 // a helper function that creates a list item for a given dream
 function appendNewDream(dream) {
@@ -120,11 +121,11 @@ function appendNewDream(dream) {
   newListItem.innerText = dream;
   dreamsList.appendChild(newListItem);
   imageSearcher.clearPictures();
-  imageSearcher.searchImage(dream); // search for image
+  imageSearcher.searchImages(dream); // search for image
 }
 
 display("Please speak to trigger search"); 
-imageSearcher.showPicture(
+imageSearcher.display(
   "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
 );
 
