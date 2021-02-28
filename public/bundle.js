@@ -1,38 +1,17 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 var jq = require("jquery")
 
-module.exports = {
-  ImageSearcher: MyImageSearcher
-};
-
-function searchImages(container, keywords) {
-    var myKey = "19419380-dc910ee0a7f8e64c10650f9f1";
-    var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
-    jq.getJSON(URL, function(data){
-      if (parseInt(data.totalHits) > 0)
-          jq.each(data.hits, function(i, hit) {
-            console.log(hit.pageURL);
-            showPicture(container, hit.previewURL);                                   
-          });
-      else
-          console.log('No hits');
-    });
-}
-
-function showPicture(container, url) {
-  var img = document.createElement("img");
-  img.src = url;
-  img.width = 200;
-  container.appendChild(img);
-}
-
 class MyImageSearcher {
-  constructor(container) {
+  constructor(apiKey, container) {
     this.container = container;
+    this.apiKey = apiKey;
   }
   
   display(url) {
-    showPicture(this.container, url)
+    var img = document.createElement("img");
+    img.src = url;
+    img.width = 200;
+    this.container.appendChild(img);
   }
   
   clearPictures() {
@@ -40,9 +19,23 @@ class MyImageSearcher {
   }
   
   searchImages(keywords) {
-    searchImages(this.container, keywords);
+    var myKey = this.apiKey;
+    var URL = "https://pixabay.com/api/?key="+myKey+"&q="+encodeURIComponent(keywords);
+    jq.getJSON(URL, function(data){
+      if (parseInt(data.totalHits) > 0)
+          jq.each(data.hits, function(i, hit) {
+            console.log(hit.pageURL);
+            this.display(hit.previewURL);                                   
+          });
+      else
+          console.log('No hits');
+    });
   }  
 }
+
+module.exports = {
+  PixaBayImageSearcher: MyImageSearcher
+};
 },{"jquery":3}],2:[function(require,module,exports){
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded  
@@ -80,11 +73,11 @@ recognition.lang =  'en-US'; // zh for chinese
 recognition.interimResults = false;
 //recognition.start();
 
-var imageSearcher = new myLib.ImageSearcher(pictureArea);
+var imageSearcher = new myLib.PixaBayImageSearcher("19419380-dc910ee0a7f8e64c10650f9f1", pictureArea);
 
 function onStart() {
   //clearPictures(); 
-  imageSearch.clearPictures(pictureArea);
+  imageSearcher.clearPictures();
   recognition.start();
 }
 
@@ -126,12 +119,12 @@ function appendNewDream(dream) {
   const newListItem = document.createElement("li");
   newListItem.innerText = dream;
   dreamsList.appendChild(newListItem);
-  imageSearch.clearPictures(pictureArea);
-  imageSearch.searchImage(pictureArea, dream); // search for image
+  imageSearcher.clearPictures();
+  imageSearcher.searchImage(dream); // search for image
 }
 
 display("Please speak to trigger search"); 
-imageSearch.showPicture(pictureArea,
+imageSearcher.showPicture(
   "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
 );
 

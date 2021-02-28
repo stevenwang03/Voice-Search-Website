@@ -34,11 +34,11 @@ recognition.lang =  'en-US'; // zh for chinese
 recognition.interimResults = false;
 //recognition.start();
 
-var imageSearcher = new myLib.ImageSearcher(pictureArea);
+var imageSearcher = new myLib.PixaBayImageSearcher("19419380-dc910ee0a7f8e64c10650f9f1", pictureArea);
 
 function onStart() {
   //clearPictures(); 
-  imageSearch.clearPictures(pictureArea);
+  imageSearcher.clearPictures();
   recognition.start();
 }
 
@@ -80,12 +80,12 @@ function appendNewDream(dream) {
   const newListItem = document.createElement("li");
   newListItem.innerText = dream;
   dreamsList.appendChild(newListItem);
-  imageSearch.clearPictures(pictureArea);
-  imageSearch.searchImage(pictureArea, dream); // search for image
+  imageSearcher.clearPictures();
+  imageSearcher.searchImage(dream); // search for image
 }
 
 display("Please speak to trigger search"); 
-imageSearch.showPicture(pictureArea,
+imageSearcher.showPicture(
   "https://i.pinimg.com/564x/46/da/e5/46dae512e375bee2664a025507da8795.jpg"
 );
 
