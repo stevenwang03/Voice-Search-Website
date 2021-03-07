@@ -1,9 +1,12 @@
 // client-side js, loaded by index.html
 // run by the browser each time the page is loaded  
 
-var myLib = require("./image-search")
+var myLib = require("./image-search");
+var machine_learning = require('./machine-learning');
+
 
 var keyword_extractor = require("keyword-extractor");
+
 
 var wordsSeen = new Set()
 
