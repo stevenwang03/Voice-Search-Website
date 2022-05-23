@@ -12,8 +12,8 @@ body {
 
 h1 {
   font-family: sans-serif;
-  font-style: italic;
-  color: silver;
+  font-style: bold;
+  color: black;
   max-width: calc(100% - 5rem);
   line-height: 1.1;
 }
