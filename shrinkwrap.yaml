@@ -1,3 +1,4 @@
+
 dependencies:
   '@teachablemachine/image': 0.8.4
   '@tensorflow/tfjs': 3.2.0
